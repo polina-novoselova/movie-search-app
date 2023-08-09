@@ -4,7 +4,7 @@ const moviesListNode = document.getElementById("movie-items");
 
 let moviesList = [];
 
-init();
+// init();
 
 function addMovie() {
   const filmName = getMovieNameFromUser();
@@ -96,8 +96,8 @@ function init() {
 
 function deleteMovie(event) {
   if (event.target.classList.contains("btn-delete-item")) {
-    const parentNode = event.target.closest(".movie-item");
 
+    const parentNode = event.target.closest(".movie-item");
     const idParentNode = Number(parentNode.id);
 
     const index = moviesList.findIndex(function (movie) {
@@ -107,9 +107,7 @@ function deleteMovie(event) {
     });
 
     moviesList.splice(index, 1);
-
     parentNode.remove();
-
     saveMoviesToStorage();
   }
 };
@@ -117,9 +115,7 @@ function deleteMovie(event) {
 function checkedMovie(event) {
   if (event.target.classList.contains("label")) {
     const parentNode = event.target.closest(".movie-item");
-
     const idParentNode = Number(parentNode.id);
-
     const index = moviesList.findIndex(function (movie) {
       if (movie.id === idParentNode) {
         return true;
@@ -155,7 +151,6 @@ function validate(filmName) {
 function handlerKeyDown(event) {
 
   if (event.key == "Enter") {
-    
     addMovie();
   }
 }
