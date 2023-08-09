@@ -1,12 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arimo&family=Montserrat:wght@200;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <link
+    rel="shortcut icon"
+    type="image/x-icon"
+    href="./resources/favicon.png"
+  />
+
+    <script src="./index.js" defer></script>
+
+    <title>Movies List</title>
+  </head>
+  <body>
+    <header>
+      <div class="width-setter">
+        <div class="plate-box">
+          <p class="plate_item">Список фильмов</p>
+          <p class="plate_item">2023</p>
+        </div>
+        <h1 class="app-title">Посмотреть</h1>
+      </div>
+    </header>
+    <main>
+      <div class="width-setter background">
+        <div class="movies-adder">
+          <input
+            class="input-for-moviename"
+            id="inputMovieAdder"
+            type="text"
+            placeholder="Добавить фильм"
+          />
+          <button class="btn-movie-adder" id="btnAddMovie"></button>
+        </div>
+        <ul class="movie-items" id="movie-items"></ul>
+      </div>
+    </main>
+
+    <footer>
+      <div class="width-setter"></div>
+    </footer>
+  </body>
 </html>
