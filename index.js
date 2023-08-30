@@ -9,7 +9,7 @@ let movies = [];
 const getMovie = async (filmName) => {
   
   try {
-    const response = await fetch(`http://www.omdbapi.com/?t=${filmName}&apikey=6152c476`);
+    const response = await fetch(`https://www.omdbapi.com/?t=${filmName}&apikey=6152c476`);
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
