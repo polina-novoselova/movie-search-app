@@ -7,7 +7,7 @@ body {
 
 body {
   background-color: #181818;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 300;
 }
 
@@ -43,47 +43,22 @@ body {
   }
 }
 
-.plate-box {
-  margin: 80px 0 0 80px;
-  display: flex;
-}
-
-.plate_item {
-  padding: 10px 20px;
-  border-radius: 200px;
-  border: 1px solid #6532f8;
-  background: #6532f8;
-  font-size: 15px;
-  color: #f3f6f9;
+.app-title {
+  margin: 100px 0 0 80px;
+  width: 100%;
+  font-size: 70px;
 }
 
 @media (max-width: 768px) {
-  .plate-box {
-    margin: 80px 0 0 15px;
-    display: flex;
+  .app-title {
+    margin: 50px 0 0 15px;
+    font-size: 35px;
   }
-
-  .plate_item {
-    font-size: 10px;
-  }
-}
-
-.app-title {
-  margin: 20px 0 0 80px;
-  width: 100%;
-  font-size: 70px;
 }
 
 .movies-adder {
   display: flex;
   gap: 15px;
-}
-
-@media (max-width: 768px) {
-  .app-title {
-    margin: 20px 0 0 15px;
-    font-size: 35px;
-  }
 }
 
 main {
@@ -97,14 +72,14 @@ main {
   max-width: 410px;
   font-size: 20px;
   color: #f3f6f9;
-  border: 1px solid rgba(243, 246, 249, 0.5);;
+  border: 1px solid rgba(243, 246, 249, 0.5);
   border-radius: 50px;
 }
 
 .input-for-moviename::placeholder {
   color: #f3f6f9;
   font-size: 20px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   letter-spacing: -0.6px;
   opacity: 0.5;
 }
@@ -160,45 +135,40 @@ main {
 
 .movie-name {
   font-size: 20px;
+  font-weight: 400;
   color: #f3f6f9;
 }
 
 .year {
-  font-size: 18px;
+  font-size: 20px;
   color: #7547ff;
 }
 
-.genre {
-    font-size: 18px;
+.about,
+.director {
+  font-size: 20px;
 }
 
 .type {
-  font-size: 18px;
+  font-size: 20px;
   opacity: 0.5;
 }
 
-.dscrpt {
-    width: 100px;
-    padding: 5px 0;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
-    background-color: #555555;
-    border-radius: 50px;
-    cursor: pointer;
-}
-
-.dscrpt:hover {
-    background-color: #777777;
+.second-block {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .rating {
-    font-size: 22px;
-    font-weight: 400;
+  font-size: 20px;
 }
 
 .btn-delete-item {
-  width: 20px;
-  height: 20px;
+  margin-left: auto;
+  width: 30px;
+  height: 30px;
   background-image: url(./resources/btn-cross.svg);
   background-repeat: no-repeat;
   background-position: center;
@@ -246,16 +216,13 @@ main {
   .year {
     font-size: 16px;
   }
-  
-  .genre {
+
+  .about,
+  .director {
     font-size: 16px;
   }
 
   .type {
-    font-size: 14px;
-  }
-
-  .dscrpt {
     font-size: 14px;
   }
 
