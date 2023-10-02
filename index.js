@@ -4,7 +4,7 @@ const moviesNode = document.getElementById("movie-items");
 
 let movies = [];
 
-// init();
+init();
 
 const getMovie = async (filmName) => {
   
@@ -17,9 +17,22 @@ const getMovie = async (filmName) => {
 
     const data = await response.json();
 
-    setMovie(data.Title, data.imdbID, data.Year, data.Country, data.Genre, data.Director, data.Type, data.imdbRating, data.Poster);
+    const {
+      Title,
+      imdbID,
+      Year,
+      Country,
+      Genre,
+      Director,
+      Type,
+      imdbRating,
+      Poster
+    } = data;
+
+    setMovie(data);
     console.log(data);
     renderMovies();
+    saveMoviesToStorage();
     return data;
 
   } catch (error) {
@@ -32,14 +45,17 @@ const getMovie = async (filmName) => {
 async function addMovie() {
   const filmName = getMovieNameFromUser();
 
-  if (filmName.trim() !== "") {
+  if (await validateTitle(filmName)) {
     try {
       await getMovie(filmName);
       clearInput();
     } catch (error) {
       console.error(error);
     }
+  } else {
+    alert("Please, enter the correct movie title");
   }
+
 };
 
 function getMovieNameFromUser() {
@@ -47,30 +63,30 @@ function getMovieNameFromUser() {
   return filmName;
 };
 
-function setMovie(Title, omdbId, Year, Country, Genre, Director, Type, imdbRating, poster) {
+function setMovie(data) {
   movies.push({
-    name: Title,
-    id: omdbId,
-    year: Year,
-    country: Country,
-    genre: Genre,
-    director: Director,
-    type: Type,
-    rating: imdbRating,
-    poster: poster,
+    name: data.Title,
+    id: data.imdbID,
+    year: data.Year,
+    country: data.Country,
+    genre: data.Genre,
+    director: data.Director,
+    type: data.Type,
+    rating: data.imdbRating,
+    poster: data.Poster,
   });
 };
 
-// function saveMoviesToStorage() {
-//   localStorage.setItem("movies", JSON.stringify(movies));
-// };
+function saveMoviesToStorage() {
+  localStorage.setItem("movies", JSON.stringify(movies));
+};
 
-// function getMoviesFromStorage() {
-//   const savedMovies = localStorage.getItem("movies");
-//   if (savedMovies) {
-//     movies = JSON.parse(savedMovies);
-//   }
-// };
+function getMoviesFromStorage() {
+  const savedMovies = localStorage.getItem("movies");
+  if (savedMovies) {
+    movies = JSON.parse(savedMovies);
+  }
+};
 
 function clearInput() {
   inputMovieAdderNode.value = "";
@@ -143,52 +159,53 @@ function renderMovies() {
   });
 };
 
-// function init() {
-//   getMoviesFromStorage();
-//   renderMovies();
-// };
+function init() {
+  getMoviesFromStorage();
+  renderMovies();
+};
 
 
 function deleteMovie(event) {
   if (event.target.classList.contains("btn-delete-item")) {
 
     const parentNode = event.target.closest(".movie-item");
-    const idParentNode = Number(parentNode.id);
+    const idParentNode = parentNode.id;
 
-    const index = movies.findIndex(function (movie) {
-      if (movie.id === idParentNode) {
-        return true;
-      }
-    });
+    const index = movies.findIndex(movie => movie.id === idParentNode);
 
     movies.splice(index, 1);
     parentNode.remove();
-    // saveMoviesToStorage();
+    saveMoviesToStorage();
   }
 };
 
-// function validate(filmName) {
-//   if (!filmName) {
-//     return false;
-//   }
+async function validateTitle(title) {
+  try {
+    const response = await fetch(`https://www.omdbapi.com/?t=${title}&apikey=6152c476`);
 
-//   if (filmName.length > 50) {
-//     return false;
-//   }
+    if (!response.ok) {
+      return false;
+    }
 
-//   if (!filmName.trim()) {
-//     return false;
-//   }
+    const data = await response.json();
+    
+    if (!data.Title || data.Title.trim() === "") {
+      return false;
+    }
 
-//   return true;
-// }
+    return true; 
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
 
-// function handlerKeyDown(event) {
+function handlerKeyDown(event) {
 
-//   if (event.key == "Enter") {
-//     addMovie();
-//   }
-// }
+  if (event.key == "Enter") {
+    addMovie();
+  }
+};
 
 // function reedMore(event) {
 //  открытие попапа с инфой о фильме
@@ -197,4 +214,4 @@ function deleteMovie(event) {
 btnAddMovieNode.addEventListener("click", addMovie);
 moviesNode.addEventListener("click", deleteMovie);
 // moviesNode.addEventListener("click", reedMore);
-// inputMovieAdderNode.addEventListener("keydown", handlerKeyDown);
+inputMovieAdderNode.addEventListener("keydown", handlerKeyDown);
