@@ -19,7 +19,8 @@ body {
 
 .background {
   margin-top: 30px;
-  height: 100%;
+  /* height: 100%; */
+  height: 600px;
   padding: 40px 70px;
   background-color: #232323;
   border-radius: 20px;
@@ -74,8 +75,9 @@ main {
 }
 
 .input-for-moviename {
+  position: relative;
   padding-left: 20px;
-  max-width: 100%;
+  width: 100%;
   height: 50px;
   font-size: 20px;
   color: #f3f6f9;
@@ -92,10 +94,8 @@ main {
 }
 
 .search-list {
-  position: absolute;
-  margin-top: 50px;
-  max-width: 100%;
-  max-height: 300px;
+  width: 100%;
+  max-height: 500px;
   overflow-y: scroll;
   border-radius: 20px;
   z-index: 10;
@@ -119,9 +119,10 @@ main {
 .search-list__item {
   display: flex;
   padding: 15px;
+  width: 100%;
   height: 120px;
   max-height: 100%;
-  gap: 20px;
+  gap: 28px;
   background-color: rgba(25, 22, 32, 0.9);
   border-bottom: 3px solid #313131;
 }
@@ -132,16 +133,24 @@ main {
 
 .search-list__thumbnail img {
  max-height: 90px;
+ max-width: 55px;
+ object-fit: cover;
 }
 
 .search-item__info {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 12px;
+  justify-content: center;
 }
 
 .search-item__info h3 {
+  font-size: 22px;
   font-weight: 400;
+}
+
+.search-item__info p {
+  font-size: 20px;
 }
 
 @media (max-width: 768px) {
@@ -156,6 +165,9 @@ main {
   }
 }
 
+.hide-search-list {
+  display: none;
+}
 
 .btn-movie-adder {
   width: 55px;
