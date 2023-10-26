@@ -131,6 +131,18 @@ main {
   border-bottom: none;
 }
 
+.search-list__item:hover {
+  background-color: rgba(48, 42, 61, 0.9);
+}
+
+.search-list__item:focus {
+  background-color: rgba(48, 42, 61, 0.9);
+}
+
+.active {
+  background-color: rgba(48, 42, 61, 0.9);
+}
+
 .search-list__thumbnail img {
  max-height: 90px;
  max-width: 55px;

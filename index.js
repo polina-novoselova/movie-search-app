@@ -7,10 +7,7 @@ const searchList = document.getElementById("search-list");
 
 // init();
 
-
 // code for movie search
-
-
 
 async function loadMovies(searchTerm) {
   const URL = `https://www.omdbapi.com/?s=${searchTerm}&apikey=6152c476`;
@@ -20,34 +17,35 @@ async function loadMovies(searchTerm) {
 
   if (data.Response === "True") {
     displayMovieSearchList(data.Search);
-  }  
+  }
 }
 
 function findMovies() {
-  const searchTerm = (inputMovieAdderNode.value).trim();
+  const searchTerm = inputMovieAdderNode.value.trim();
   console.log(searchTerm);
   if (searchTerm.length > 0) {
-    searchList.classList.remove('hide-search-list');
+    searchList.classList.remove("hide-search-list");
     loadMovies(searchTerm);
-  
   } else {
-    searchList.classList.add('hide-search-list');
+    searchList.classList.add("hide-search-list");
   }
 }
 
 function displayMovieSearchList(films) {
   searchList.innerHTML = "";
+  searchList.scrollTop = 0;
+
   for (let i = 0; i < films.length; i++) {
-    let movieSearchListItem = document.createElement('li');
+    let movieSearchListItem = document.createElement("li");
     movieSearchListItem.dataset.id = films[i].imdbID;
     movieSearchListItem.classList.add("search-list__item");
 
     if (films[i].Poster !== "N/A") {
       movieSearchPoster = films[i].Poster;
     } else {
-      movieSearchPoster = "resources/image_not_found.png";
+      movieSearchPoster = "resources/image-not-found.png";
     }
-     
+
     movieSearchListItem.innerHTML = `
     <div class="search-list__thumbnail">
       <img src="${movieSearchPoster}">
@@ -63,10 +61,39 @@ function displayMovieSearchList(films) {
   }
 }
 
+let currentFocus = -1;
+const items = searchList.getElementsByTagName("li");
+
+inputMovieAdderNode.addEventListener("keydown", arrowsKeyHandler);
+
+
+function setActiveItem(index) {
+  if (currentFocus > -1) {
+    items[currentFocus].classList.remove("active");
+  }
+  currentFocus = index;
+  items[currentFocus].classList.add("active");
+}
+
+function arrowsKeyHandler(event) {
+  if (event.key === "ArrowDown") {
+    currentFocus = (currentFocus + 1) % items.length;
+  } else if (event.key === "ArrowUp") {
+    currentFocus = (currentFocus - 1 + items.length) % items.length;
+  }
+    // } else if (event.key === "Enter") {
+  //   if (currentFocus > -1) {
+  //     items[currentFocus].click(); // например, эмулировать клик по элементу
+  //   }
+  // }
+
+  setActiveItem(currentFocus);
+}
+
 // my code for movie list
 
 // const getMovie = async (filmName) => {
-  
+
 //   try {
 //     const response = await fetch(`https://www.omdbapi.com/?t=${filmName}&apikey=6152c476`);
 
@@ -188,7 +215,6 @@ function displayMovieSearchList(films) {
 //     const type = document.createElement("p");
 //     type.className = "type";
 //     type.innerHTML = `Category: ${movie.type}`;
-    
 
 //     const secondBlock = document.createElement("div");
 //     secondBlock.className = "second-block";
@@ -205,14 +231,14 @@ function displayMovieSearchList(films) {
 //     movieItem.appendChild(poster);
 //     movieItem.appendChild(infoBlock);
 //     infoBlock.appendChild(movieInfo);
-//     movieInfo.appendChild(movieName); 
+//     movieInfo.appendChild(movieName);
 //     movieInfo.appendChild(year);
 //     movieInfo.appendChild(about);
 //     movieInfo.appendChild(director);
 //     movieInfo.appendChild(type);
-//     movieItem.appendChild(secondBlock); 
+//     movieItem.appendChild(secondBlock);
 //     secondBlock.appendChild(deleteItemBtn);
-//     secondBlock.appendChild(rating);    
+//     secondBlock.appendChild(rating);
 
 //     moviesNode.appendChild(movieItem);
 //   });
@@ -222,7 +248,6 @@ function displayMovieSearchList(films) {
 //   getMoviesFromStorage();
 //   renderMovies();
 // };
-
 
 // function deleteMovie(event) {
 //   if (event.target.classList.contains("btn-delete-item")) {
@@ -247,12 +272,12 @@ function displayMovieSearchList(films) {
 //     }
 
 //     const data = await response.json();
-    
+
 //     if (!data.Title || data.Title.trim() === "") {
 //       return false;
 //     }
 
-//     return true; 
+//     return true;
 //   } catch (error) {
 //     console.error(error);
 //     return false;
