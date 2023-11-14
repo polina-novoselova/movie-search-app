@@ -68,14 +68,19 @@ inputMovieAdderNode.addEventListener("keydown", arrowsKeyHandler);
 
 
 function setActiveItem(index) {
-  if (currentFocus > -1) {
-    items[currentFocus].classList.remove("active");
-  }
+    if (currentFocus > -1) {
+      items[currentFocus].classList.remove("active");
+    }
+  
   currentFocus = index;
+
   items[currentFocus].classList.add("active");
-}
+};
+
+
 
 function arrowsKeyHandler(event) {
+  // event.preventDefault();
   if (event.key === "ArrowDown") {
     currentFocus = (currentFocus + 1) % items.length;
   } else if (event.key === "ArrowUp") {
