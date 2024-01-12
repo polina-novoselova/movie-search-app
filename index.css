@@ -135,6 +135,10 @@ main {
   background-color: rgba(48, 42, 61, 0.9);
 }
 
+.search-list__item:active {
+  background-color: rgba(48, 42, 61, 0.9);
+}
+
 .active {
   background-color: rgba(48, 42, 61, 0.9);
 }
